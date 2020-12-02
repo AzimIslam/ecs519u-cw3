@@ -64,21 +64,24 @@ CREATE TABLE Employee(
     firstname varchar(255) NOT NULL,
     surname varchar(255) NOT NULL,
     dob DATE NOT NULL,
-    gender CHAR(1) CHECK(gender == 'M' or gender == 'F'),
-    occupation int NOT NULL FOREIGN KEY REFERENCES Occupation(OccupationID) ON UPDATE CASCADE ON DELETE RESTRICT
+    gender CHAR(1),
+    OccupationID int NOT NULL REFERENCES Occupation(OccupationID),
+    CONSTRAINT chk_date CHECK (gender='M' or gender='F')
 );
 
 CREATE TABLE Train(
-    Model varchar(128) primary key,
-    operation varchar(10) CHECK(operation == 'TRUE' or operation == 'FALSE'),
-    ModelYear YEAR NOT NULL
+    TrainModel varchar(128) primary key,
+    operation varchar(10),
+    ModelYear INT NOT NULL,
+    constraint chkOperation CHECK (operation='TRUE' or operation='FALSE')
 );
 
 CREATE TABLE Passenger(
     PassengerID int primary key,
     firstname varchar(255) NOT NULL,
     surname varchar(255) NOT NULL,
-    passengertype varchar(255) CHECK(passengertype == 'Student' or passengertype='Junior' or passengertype='Adult' or passengertype='Senior');
+    passengertype varchar(255), 
+    constraint chkPassengerType CHECK(passengertype = 'Student' or passengertype='Junior' or passengertype='Adult' or passengertype='Senior')
 );
 
 CREATE TABLE City(
@@ -87,37 +90,39 @@ CREATE TABLE City(
     CityName varchar(255) NOT NULL
 );
 
-CREATE TABLE Crew(
-    EmployeeID int NOT NULL FOREIGN KEY REFERENCES Employee(EmployeeID) ON DELETE CASCADE ON UPDATE CASCADE,
-    TripID int NOT NULL FOREIGN KEY REFERENCES Trip(TripID) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE Trip(
-    TripID int primary key,
-    starttime TIME NOT NULL,
-    endtime TIME NOT NULL,
-    trip_date date NOT NULL,
-    train_model int NOT NULL FOREIGN KEY REFERENCES Train(Model) ON DELETE RESTRICT ON UPDATE CASCADE,
-    routeID int NOT NULL FOREIGN KEY REFERENCES Routes(routeID) ON DELETE RESTRICT ON UPDATE CASCADE
-);
-
-CREATE Table PassengerTrips (
-    PassengerID int NOT NULL FOREIGN KEY REFERENCES Passenger(PassengerID) ON DELETE CASCADE ON UPDATE CASCADE,
-    TripID int NOT NULL FOREIGN KEY REFERENCES Trip(TripID) ON DELETE CASCADE ON UPDATE CASCADE,
+CREATE TABLE Station(
+    StationID int primary key,
+    StationName varchar(255) NOT NULL,
+    CityID int NOT NULL REFERENCES City(CityID)
 );
 
 CREATE Table Routes (
     RouteID int primary key,
-    StartStation int NOT NULL FOREIGN KEY REFERENCES Station(StationID) ON DELETE RESTRICT ON UPDATE CASCADE,
-    EndStation int NOT NULL FOREIGN KEY REFERENCES Station(StationID) ON DELETE RESTRICT ON UPDATE CASCADE,
+    StartStation int NOT NULL REFERENCES Station(StationID),
+    EndStation int NOT NULL REFERENCES Station(StationID),
     Distance REAL NOT NULL
 );
 
-CREATE TABLE Station(
-    StationID int primary key,
-    StationName varchar(255) NOT NULL,
-    CityID int NOT NULL FOREIGN KEY REFERENCES City(CityID) ON DELETE RESTRICT ON UPDATE CASCADE
+CREATE TABLE Trip(
+    TripID int primary key,
+    starttime TIMESTAMP NOT NULL,
+    endtime TIMESTAMP NOT NULL,
+    trip_date date NOT NULL,
+    train_model varchar(128) NOT NULL REFERENCES Train(TrainModel),
+    routeID int NOT NULL REFERENCES Routes(routeID)
 );
+
+CREATE TABLE Crew(
+    EmployeeID int NOT NULL REFERENCES Employee(EmployeeID),
+    TripID int NOT NULL REFERENCES Trip(TripID)
+);
+
+CREATE Table PassengerTrips (
+    PassengerID int NOT NULL REFERENCES Passenger(PassengerID),
+    TripID int NOT NULL REFERENCES Trip(TripID)
+);
+
+
 
 
 /* INSERT VALUES*/
