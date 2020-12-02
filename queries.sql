@@ -52,12 +52,6 @@ CREATE Table Routes (
     Distance REAL NOT NULL
 );
 
-CREATE Table City (
-    CityID int primary key,
-    Country varchar(255) NOT NULL,
-    CityName varchar(255) NOT NULL,
-);
-
 CREATE TABLE Station(
     StationID int primary key,
     StationName varchar(255) NOT NULL,
