@@ -128,4 +128,22 @@ CREATE Table PassengerTrips (
 /* INSERT VALUES*/
 
 /* Occupations */
-/* Boss, Driver, Conductor, Service Member, Administrator*/
+INSERT INTO Occupation VALUES(1, 'Driver');
+INSERT INTO Occupation VALUES(2, 'Conductor');
+INSERT INTO Occupation VALUES(3, 'Service Member');
+INSERT INTO Occupation VALUES(4, 'Security Guard');
+
+
+/* Employee */
+INSERT INTO Employee VALUES(1, 'Bob', 'Jones', TO_DATE('20-FEB-1981', 'DD-MON-YYYY'), 'M', 1);
+INSERT INTO Employee VALUES(2, 'Farah', 'Walterson', TO_DATE('15-NOV-1984', 'DD-MON-YYYY'), 'F', 1);
+INSERT INTO Employee VALUES(3, 'Yoann', 'Monday', TO_DATE('01-NOV-1997', 'DD-MON-YYYY'), 'M', 2);
+INSERT INTO Employee VALUES(4, 'Emma', 'Csizamdia', TO_DATE('08-FEB-1997', 'DD-MON-YYYY'), 'F', 2);
+INSERT INTO Employee VALUES(5, 'Diarmaid', 'Smets', TO_DATE('06-JUL-1983', 'DD-MON-YYYY'), 'F', 3);
+INSERT INTO Employee VALUES(6, 'Atli', 'Torosyan', TO_DATE('18-SEP-1979', 'DD-MON-YYYY'), 'M', 3);
+INSERT INTO Employee VALUES(7, 'Aoi', 'Etxeberria', TO_DATE('16-APR-1976', 'DD-MON-YYYY'), 'M', 3);
+INSERT INTO Employee VALUES(8, 'Fedir', 'Andries', TO_DATE('28-APR-1989', 'DD-MON-YYYY'), 'F', 3);
+INSERT INTO Employee VALUES(9, 'Lakshmi', 'Rimmer', TO_DATE('11-FEB-1983', 'DD-MON-YYYY'), 'F', 3);
+INSERT INTO Employee VALUES(10, 'Eraldo', 'Chaudhuri', TO_DATE('06-APR-1997', 'DD-MON-YYYY'), 'M', 4);
+INSERT INTO Employee VALUES(11, 'Helfried', 'Sgro', TO_DATE('28-OCT-1980', 'DD-MON-YYYY'), 'M', 4);
+
