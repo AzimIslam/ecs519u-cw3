@@ -85,7 +85,6 @@ INSERT INTO Occupation VALUES(2, 'Conductor');
 INSERT INTO Occupation VALUES(3, 'Service Member');
 INSERT INTO Occupation VALUES(4, 'Security Guard');
 
-
 /* Employee */
 INSERT INTO Employee VALUES(1, 'Bob', 'Jones', TO_DATE('20-FEB-1981', 'DD-MON-YYYY'), 'M', 1);
 INSERT INTO Employee VALUES(2, 'Farah', 'Walterson', TO_DATE('15-NOV-1984', 'DD-MON-YYYY'), 'F', 1);
@@ -124,13 +123,39 @@ INSERT INTO City VALUES(3, 'Belgium', 'Brussels');
 INSERT INTO City VALUES(4, 'Germany', 'Cologne');
 
 /* Station */
-
+INSERT INTO Station VALUES(1, 'London St Pancras', 1);
+INSERT INTO Station VALUES(2, 'London Euston', 1);
+INSERT INTO Station VALUES(3, 'Gare du Nord', 2);
+INSERT INTO Station VALUES(4, 'Disneyland Paris', 2);
+INSERT INTO Station VALUES(5, 'Brussels Midi', 3);
+INSERT INTO Station VALUES(6, 'Hauptbahnhof', 4);
 
 /* Routes */
+INSERT INTO Routes VALUES(1, 1, 3, 291.5);
+INSERT INTO Routes VALUES(2, 1, 5, 240.2);
+INSERT INTO Routes VALUES(3, 6, 3, 1045.2);
+INSERT INTO Routes VALUES(4, 3, 2, 461.8);
+INSERT INTO Routes VALUES(5, 4, 3, 45.3);
+INSERT INTO Routes VALUES(6, 6, 1, 341.5);
+INSERT INTO Routes VALUES(7, 2, 4, 253.3);
+INSERT INTO Routes VALUES(8, 5, 4, 263.3);
+INSERT INTO Routes VALUES(9, 2, 6, 532.4);
+INSERT INTO Routes VALUES(10, 5, 6, 423.2);
 
 /* Trip */
 
 /* Crew */
 
 /* PassengerTrip */
-
+INSERT INTO PassengerTrips VALUES (5, 7);
+INSERT INTO PassengerTrips VALUES (6, 7);
+INSERT INTO PassengerTrips VALUES (3, 5);
+INSERT INTO PassengerTrips VALUES (7, 5);
+INSERT INTO PassengerTrips VALUES (1, 4);
+INSERT INTO PassengerTrips VALUES (2, 3);
+INSERT INTO PassengerTrips VALUES (4, 2);
+INSERT INTO PassengerTrips VALUES (8, 1);
+INSERT INTO PassengerTrips VALUES (9, 5);
+INSERT INTO PassengerTrips VALUES (10, 2);
+INSERT INTO PassengerTrips VALUES (10, 4);
+INSERT INTO PassengerTrips VALUES (10, 6);
