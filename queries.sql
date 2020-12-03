@@ -336,7 +336,7 @@ INNER JOIN Trip t
 ON pt.TripID = t.TripID 
 Where p.firstname = 'BILLY'
 AND   p.surname = 'KEITH'
-ORDER BY t.endtime - t.starttime
+ORDER BY t.endtime - t.starttime;
 
 /* Show the number of employees for each occupation */
 /* Medium Query 2 - Join, Group By */
