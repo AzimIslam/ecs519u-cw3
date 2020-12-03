@@ -313,3 +313,44 @@ INSERT INTO PassengerTrips VALUES (9, 5);
 INSERT INTO PassengerTrips VALUES (10, 2);
 INSERT INTO PassengerTrips VALUES (10, 4);
 INSERT INTO PassengerTrips VALUES (10, 6);
+
+/* BASIC QUERIES */
+
+/* Show all employees who are male and whose surname begins with the letter ‘C’ */
+/* Basic Query 1 - Conditions */
+SELECT * From Employee Where gender = 'M' and surname like 'C%';
+
+/* Show the number of females that the train company has employed */
+/* Basic Query 2 - Conditions */
+SELECT count(*) AS "Number of Females" FROM Employee WHERE gender = 'F';
+
+/* MEDIUM Queries */
+
+/* Show all trips where BILLY KEITH was a passenger order by journey time */
+/* Medium Query 1 - Join, Order By */
+SELECT t.*
+FROM PassengerTrips pt
+INNER JOIN Passenger p
+ON p.PassengerID = pt.PassengerID
+INNER JOIN Trip t
+ON pt.TripID = t.TripID 
+Where p.firstname = 'BILLY'
+AND   p.surname = 'KEITH'
+ORDER BY t.endtime - t.starttime
+
+/* Show the number of employees for each occupation */
+/* Medium Query 2 - Join, Group By */
+SELECT o.OccupationName, count(*) AS "Number of Employees"
+From Employee e
+INNER JOIN Occupation o 
+ON e.OccupationID = o.OccupationID 
+GROUP BY o.OccupationName;
+
+/* Show the average age of all employees for each occupation */
+/* Medium Query 3 - Function, Group By, Join */
+SELECT o.OccupationName, AVG(to_char(SYSDATE, 'YYYY') - to_char(e.dob, 'YYYY')) AS "Average Age"
+FROM Employee e
+INNER JOIN Occupation o
+ON e.OccupationID = o.OccupationID
+GROUP BY o.OccupationName;
+
