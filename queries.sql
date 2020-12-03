@@ -362,6 +362,8 @@ CREATE VIEW Junior_Customers AS
 SELECT FirstName, Surname
 FROM Passenger
 WHERE PassengerType = 'Junior';
+/* This shows all the data from the view that we created */
+SELECT * FROM Junior_Customers;
 
 /* Show the first name and last name of all the passengers who are the same passengertpye as Poppy */
 /* Advanced Query 2 - Subqueries */
@@ -378,3 +380,4 @@ ON e.OccupationID = o.OccupationID
 WHERE gender = 'F'
 GROUP BY o.OccupationName
 HAVING COUNT(*) >= 1;
+
