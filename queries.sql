@@ -314,7 +314,7 @@ INSERT INTO PassengerTrips VALUES (10, 2);
 INSERT INTO PassengerTrips VALUES (10, 4);
 INSERT INTO PassengerTrips VALUES (10, 6);
 
-/* BASIC QUERIES */
+/* BASIC Queries */
 
 /* Show all employees who are male and whose surname begins with the letter ‘C’ */
 /* Basic Query 1 - Conditions */
@@ -354,3 +354,27 @@ INNER JOIN Occupation o
 ON e.OccupationID = o.OccupationID
 GROUP BY o.OccupationName;
 
+/* ADVANCED Queries */
+
+/* Create a view called Junior_Customers which shows the first name and last name of each passenger where they are a junior */
+/* Advanced Query 1- View */
+CREATE VIEW Junior_Customers AS 
+SELECT FirstName, Surname
+FROM Passenger
+WHERE PassengerType = 'Junior';
+
+/* Show the first name and last name of all the passengers who are the same passengertpye as Poppy */
+/* Advanced Query 2 - Subqueries */
+SELECT FirstName, Surname
+From Passenger
+Where PassengerType = (Select PassengerType From Passenger Where firstname='POPPY');
+
+/* Show all the occupations that have at least 1 female and the average age of all the female employees in that occupation */
+/* Advanced Query 3 - Having, Aggregates */
+SELECT o.OccupationName, AVG(to_char(SYSDATE, 'YYYY') - to_char(e.dob, 'YYYY')) AS "Average Age"
+FROM Employee e
+INNER JOIN Occupation o
+ON e.OccupationID = o.OccupationID
+WHERE gender = 'F'
+GROUP BY o.OccupationName
+HAVING COUNT(*) >= 1;
