@@ -1,11 +1,13 @@
 /* GROUP PARTICIPANTS
-    Azim Islam - 190227344
-    Rikhil Shah - 190182098
-    Haroon Aftab - 190290452
-    Sahir Ahmed - 190191746
+Azim Islam - 190227344
+Rikhil Shah - 190182098
+Haroon Aftab - 190290452
+Sahir Ahmed - 190191746
 */
 
+
 /* CREATE Table statements */
+
 CREATE TABLE Occupation(
     OccupationID int primary key,
     OccupationName varchar(255)
@@ -72,8 +74,6 @@ CREATE Table PassengerTrips (
     PassengerID int NOT NULL REFERENCES Passenger(PassengerID),
     TripID int NOT NULL REFERENCES Trip(TripID)
 );
-
-
 
 
 /* INSERT statements*/
@@ -314,19 +314,29 @@ INSERT INTO PassengerTrips VALUES (10, 2);
 INSERT INTO PassengerTrips VALUES (10, 4);
 INSERT INTO PassengerTrips VALUES (10, 6);
 
+
 /* BASIC Queries */
 
 /* Show all employees who are male and whose surname begins with the letter ‘C’ */
 /* Basic Query 1 - Conditions */
 SELECT * From Employee Where gender = 'M' and surname like 'C%';
+/*
+EXPECTED OUTPUT:
+10	Eraldo	Chaudhuri	06-APR-97	M	4
+*/
 
 /* Show the number of females that the train company has employed */
 /* Basic Query 2 - Conditions */
 SELECT count(*) AS "Number of Females" FROM Employee WHERE gender = 'F';
+/*
+EXPECTED OUTPUT:
+5
+*/
+
 
 /* MEDIUM Queries */
 
-/* Show all trips where BILLY KEITH was a passenger order by journey time */
+/* Show all trips where BILLY KEITH was a passenger, order by journey time */
 /* Medium Query 1 - Join, Order By */
 SELECT t.*
 FROM PassengerTrips pt
@@ -337,6 +347,12 @@ ON pt.TripID = t.TripID
 Where p.firstname = 'BILLY'
 AND   p.surname = 'KEITH'
 ORDER BY t.endtime - t.starttime;
+/*
+EXPECTED OUTPUT:
+6	22-DEC-20 05.00.00.000000 PM	22-DEC-20 08.00.00.000000 PM	RPG-9100	6
+2	16-DEC-20 09.00.00.000000 AM	16-DEC-20 01.00.00.000000 PM	XD-500	    2
+4	19-DEC-20 06.00.00.000000 PM	19-DEC-20 10.00.00.000000 PM	RPG-9100	4
+*/
 
 /* Show the number of employees for each occupation */
 /* Medium Query 2 - Join, Group By */
@@ -345,6 +361,13 @@ From Employee e
 INNER JOIN Occupation o 
 ON e.OccupationID = o.OccupationID 
 GROUP BY o.OccupationName;
+/*
+EXPECTED OUTPUT:
+Driver	2
+Conductor	2
+Service Member	5
+Security Guard	2
+*/
 
 /* Show the average age of all employees for each occupation */
 /* Medium Query 3 - Function, Group By, Join */
@@ -353,6 +376,14 @@ FROM Employee e
 INNER JOIN Occupation o
 ON e.OccupationID = o.OccupationID
 GROUP BY o.OccupationName;
+/*
+EXPECTED OUTPUT:
+Driver	37.5
+Conductor	23
+Service Member	38
+Security Guard	31.5
+*/
+
 
 /* ADVANCED Queries */
 
@@ -364,12 +395,22 @@ FROM Passenger
 WHERE PassengerType = 'Junior';
 /* This shows all the data from the view that we created */
 SELECT * FROM Junior_Customers;
+/*
+EXPECTED OUTPUT:
+AMY	MENON
+NIKOS TOMBROS
+*/
 
-/* Show the first name and last name of all the passengers who are the same passengertpye as Poppy */
+/* Show the first name and last name of all the passengers who are the same passenger type as Poppy */
 /* Advanced Query 2 - Subqueries */
 SELECT FirstName, Surname
 From Passenger
 Where PassengerType = (Select PassengerType From Passenger Where firstname='POPPY');
+/*
+EXPECTED OUTPUT:
+WAFI	TAWFIQ
+POPPY	SOAMES
+*/
 
 /* Show all the occupations that have at least 1 female and the average age of all the female employees in that occupation */
 /* Advanced Query 3 - Having, Aggregates */
@@ -380,4 +421,9 @@ ON e.OccupationID = o.OccupationID
 WHERE gender = 'F'
 GROUP BY o.OccupationName
 HAVING COUNT(*) >= 1;
-
+/*
+EXPECTED OUTPUT:
+Driver	36
+Conductor	23
+Service Member	35
+*/
